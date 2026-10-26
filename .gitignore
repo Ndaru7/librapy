@@ -1,0 +1,7 @@
+__pycache__
+.env
+.venv
+*.db
+.pytest_cache
+.ruff_cache
+ruff.toml

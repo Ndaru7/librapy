@@ -2,6 +2,7 @@ __pycache__
 .env
 .venv
 *.db
+*.sqlite
 .pytest_cache
 .ruff_cache
 ruff.toml

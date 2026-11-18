@@ -1,3 +1,4 @@
+from datetime import date
 from uuid import UUID, uuid4
 
 from pydantic import BaseModel, EmailStr
@@ -22,6 +23,36 @@ class AuthorUpdate(AuthorBase):
     fullname: str | None = None
     email: EmailStr | None = None
     secret_name: str | None = None
+
+""" book model"""
+class BookBase(SQLModel):
+    title: str
+    description: str | None
+    isbn: str
+    publisher: str
+    language: str
+    pages: int
+    author: str | None = Field(default=None, foreign_key="author.id")
+    publication_date: date
+
+class Book(BookBase, table=True):
+    id: UUID | None = Field(default_factory=uuid4, primary_key=True)
+
+class BookPublic(BookBase):
+    id: UUID | None = Field(default_factory=uuid4, primary_key=True)
+
+class BookCreate(BookBase):
+    pass
+
+class BookUpdate(BookBase):
+    title: str | None
+    description: str | None
+    isbn: str | None
+    publisher: str | None
+    language: str | None
+    pages: int | None
+    author: str | None = Field(default=None, foreign_key="author.id")
+    publication_date: date | None
 
 """ user model """
 class UserBase(SQLModel):
